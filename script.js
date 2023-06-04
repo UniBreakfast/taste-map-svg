@@ -3,7 +3,7 @@ const cats = [
     name: 'Фруктові',
     color: '#000000',
     items: [],
-    amount: 0,
+    amount: 5,
   },
   {
     name: 'Ягідні',
@@ -15,7 +15,7 @@ const cats = [
     name: 'Цитрусові',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 40,
   },
   {
     name: 'Сухофрукти',
@@ -27,7 +27,7 @@ const cats = [
     name: 'Пряні',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 90,
   },
   {
     name: 'Солодкі',
@@ -39,13 +39,13 @@ const cats = [
     name: 'Вершкові',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 80,
   },
   {
     name: 'Горіхові',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 33,
   },
   {
     name: 'Солодові',
@@ -57,13 +57,13 @@ const cats = [
     name: 'Морські',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 7,
   },
   {
     name: 'Димні',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 2,
   },
   {
     name: 'Земляні',
@@ -75,19 +75,19 @@ const cats = [
     name: 'Деревний',
     color: '#7BAB64',
     items: ['Хвоя', 'Смерека'],
-    amount: 0,
+    amount: 19,
   },
   {
     name: 'Трав\'яні',
     color: '#A0CF3C',
     items: [],
-    amount: 0,
+    amount: 40,
   },
   {
     name: 'Овочеві',
     color: '#F2C94C',
     items: [],
-    amount: 0,
+    amount: 30,
   },
   {
     name: 'Квіткові',
@@ -135,15 +135,14 @@ function getStarPoints(cats, r, gap) {
   const points = []
   const innerPoints = []
   const outerPoints = []
-  const total = r + gap
   const shift = PI * 2 / cats.length / 2
 
   for (let i = 0; i < cats.length; i++) {
     const angle = 2 * PI * (i / cats.length) - PI / 2
     const iX = gap * cos(angle - shift)
     const iY = gap * sin(angle - shift)
-    const oX = total * cats[i].amount / 100 * cos(angle)
-    const oY = total * cats[i].amount / 100 * sin(angle)
+    const oX = ((r * cats[i].amount / 100) + gap) * cos(angle)
+    const oY = ((r * cats[i].amount / 100) + gap) * sin(angle)
 
     innerPoints.push([+iX.toFixed(3), +iY.toFixed(3)])
     outerPoints.push([+oX.toFixed(3), +oY.toFixed(3)])
