@@ -17,8 +17,12 @@
 
 <body id="body">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="40" stroke="blue" fill="transparent" />
-    <polygon fill="blue" />
+    <defs>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="0" stdDeviation="2" />
+      </filter>
+    </defs>
+    <polygon fill="white" filter="url(#shadow)"/>
   </svg>
 
 

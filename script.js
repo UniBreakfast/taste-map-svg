@@ -99,14 +99,15 @@ const cats = [
 const design = {
   r: 175,
   count: 5,
-  color1: '#D0EDC4',
-  color2: '#F2F8F0',
+  color1: '#C0E0B4', 
+  color2: '#ABD296', 
   gap: 35,
 
 }
 const size = design.r * 2 + design.gap * 2
 const ratio = size / 100
 const { PI, sin, cos } = Math
+const svg = document.querySelector('svg')
 const polygon = document.querySelector('polygon')
 
 
@@ -115,7 +116,7 @@ renderTasteMap(cats, design)
 function renderTasteMap(cats, design) {
   const { r, count, color1, color2, gap } = design
 
-  drawCircles(r, count, color1, color2)
+  drawCircles(gap, count, color1, color2)
   drawAxis(r, cats.length)
   drawStar(cats, r, gap)
   addLabels(cats, r, gap)
@@ -165,13 +166,27 @@ function drawAxis(r, count) {
 }
 
 function drawCircles(r, count, color1, color2) {
+  for (let i = 0; i < count; i++) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+    const color = i % 2 ? color1 : color2
 
+    circle.setAttribute('cx', 50)
+    circle.setAttribute('cy', 50)
+    circle.setAttribute('r', r/ratio * (i + 1))
+    circle.setAttribute('fill', color)
+
+    svg.prepend(circle)
+    
+    if (i === count - 1) {
+      circle.setAttribute('filter', 'url(#shadow)')
+    }
+  }
 }
 
 function addLabels(cats, r, gap) {
 
 }
 
-function convert(point) {
-  return point.map(value => value / ratio + 50)
+function convert([x, y]) {
+  return [x / ratio + 50, y / ratio + 50]
 }
