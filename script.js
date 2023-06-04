@@ -116,8 +116,8 @@ renderTasteMap(cats, design)
 function renderTasteMap(cats, design) {
   const { r, count, color1, color2, gap } = design
 
+  drawAxis(r + gap, cats.length)
   drawCircles(gap, count, color1, color2)
-  drawAxis(r, cats.length)
   drawStar(cats, r, gap)
   addLabels(cats, r, gap)
 }
@@ -162,7 +162,22 @@ function drawPath(points) {
 }
 
 function drawAxis(r, count) {
+  for (let i = 0; i < count; i++) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+    const angle = 2 * PI * (i / count) - PI / 2
+    const x = r * cos(angle)
+    const y = r * sin(angle)
 
+    line.setAttribute('x1', 50)
+    line.setAttribute('y1', 50)
+    line.setAttribute('x2', x / ratio + 50)
+    line.setAttribute('y2', y / ratio + 50)
+    line.setAttribute('stroke', '#000000')
+    line.setAttribute('stroke-width', 0.1)
+    line.setAttribute('stroke-dasharray', '2 1')
+
+    svg.prepend(line)
+  }
 }
 
 function drawCircles(r, count, color1, color2) {
